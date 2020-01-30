@@ -27,9 +27,20 @@ Board.prototype.findSpace = function(x, y){
   }
 }
 
-
-
-
+Board.prototype.checkRow = function(){
+  var row1 = this.space1.mark + this.space2.mark + this.space3.mark;
+  var row2 = this.space4.mark + this.space5.mark + this.space6.mark;
+  var row3 = this.space7.mark + this.space8.mark + this.space9.mark;
+  if (row1.charAt(0) === row1.charAt(1) && row1.charAt(1) === row1.charAt(2)){
+    return true;
+  } else if (row2.charAt(0) === row2.charAt(1) && row2.charAt(1) === row2.charAt(2)) {
+    return true;
+  } else if (row3.charAt(0) === row3.charAt(1) && row3.charAt(1) === row3.charAt(2)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 
 function Space (xCoordinate, yCoordinate){
@@ -54,6 +65,7 @@ Space.prototype.markedBy = function(){
 }
 
 
+
 // User Interface Logic
 var testPlayer = new Player("X");
 console.log(testPlayer.mark());
@@ -62,14 +74,20 @@ var board = new Board();
 console.log(board);
 console.log(board.findSpace(1, 2));
 
-var testSpace = board.findSpace(1, 2);
+var testSpace1 = board.findSpace(1, 1);
+var testSpace2 = board.findSpace(1, 2);
+var testSpace3 = board.findSpace(1, 3);
 
-console.log(testSpace.findxCoordinate());
-console.log(testSpace.findyCoordinate());
+// console.log(testSpace.findxCoordinate());
+// console.log(testSpace.findyCoordinate());
 
-testSpace.markWith(testPlayer.mark());
-console.log(testSpace);
-console.log(testSpace.markedBy());
+testSpace1.markWith(testPlayer.mark());
+testSpace2.markWith(testPlayer.mark());
+testSpace3.markWith(testPlayer.mark());
+console.log(board.checkRow());
+console.log(testSpace1.markedBy());
+// console.log(testSpace);
+// console.log(testSpace.markedBy());
 
 
 $(document).ready(function(){
