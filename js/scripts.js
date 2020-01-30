@@ -1,6 +1,9 @@
 // Business Logic
-function Player(char) {
+
+// Player Constructor --------------------------
+function Player(char, status) {
   this.char = char;
+  this.status = status;
 }
 
 Player.prototype.mark = function() {
@@ -19,8 +22,9 @@ function Board (){
   this.space9 = new Space(3, 3)
 }
 
+// Board Constructor --------------------------
 Board.prototype.findSpace = function(x, y){
-  for (i=1; i<=9; i++){
+  for (var i=1; i<=9; i++){
     if (this[`space${i}`].xCoordinate === x && this[`space${i}`].yCoordinate === y){
       return this[`space${i}`];
     }
@@ -42,7 +46,34 @@ Board.prototype.checkRow = function(){
   }
 }
 
+Board.prototype.checkColumn = function(){
+  var col1 = this.space1.mark + this.space4.mark + this.space7.mark;
+  var col2 = this.space2.mark + this.space5.mark + this.space8.mark;
+  var col3 = this.space3.mark + this.space6.mark + this.space9.mark;
+  if (col1.charAt(0) === col1.charAt(1) && col1.charAt(1) === col1.charAt(2)){
+    return true;
+  } else if (col2.charAt(0) === col2.charAt(1) && col2.charAt(1) === col2.charAt(2)) {
+    return true;
+  } else if (col3.charAt(0) === col3.charAt(1) && col3.charAt(1) === col3.charAt(2)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
+Board.prototype.checkDiagonal = function(){
+  var diag1 = this.space1.mark + this.space5.mark + this.space9.mark;
+  var diag2 = this.space3.mark + this.space5.mark + this.space7.mark;
+  if (diag1.charAt(0) === diag1.charAt(1) && diag1.charAt(1) === diag1.charAt(2)){
+    return true;
+  } else if (diag2.charAt(0) === diag2.charAt(1) && diag2.charAt(1) === diag2.charAt(2)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// Space Constructor --------------------------
 function Space (xCoordinate, yCoordinate){
   this.xCoordinate = xCoordinate;
   this.yCoordinate = yCoordinate;
@@ -64,35 +95,71 @@ Space.prototype.markedBy = function(){
   return this.mark;
 }
 
+// Game Constructor --------------------------
+function Game() {
+  this.player1 = new Player("X", true);
+  this.player2 = new Player("O", false);
+  this.board = new Board();
+}
+
+Game.prototype.changeStatus = function(){
+  if (this.player1.status){
+    this.player1.status = false;
+    this.player2.status = true;
+  } else {
+    this.player1.status = true;
+    this.player2.status = false;
+  }
+  console.log(this.player1)
+  console.log(this.player2)
+}
+
+var game = new Game();
 
 
 // User Interface Logic
-var testPlayer = new Player("X");
-console.log(testPlayer.mark());
 
-var board = new Board();
-console.log(board);
-console.log(board.findSpace(1, 2));
 
-var testSpace1 = board.findSpace(1, 1);
-var testSpace2 = board.findSpace(1, 2);
-var testSpace3 = board.findSpace(1, 3);
+//     testSpace1.markWith(testPlayer2.mark());
+//   ($("div#space2").on("click", function()){
+//   });
+//   $("div#space3").on("click", function(){
+//   });
+//   $("div#space4").on("click", function(){
+//     console.log("hello");
+//   });
+//   $("div#space5").on("click", function(){
+//     console.log("hello");
+//   });
+//   $("div#space6").on("click", function(){
+//     console.log("hello");
+//   });
+//   $("div#space7").on("click", function(){
+//     console.log("hello");
+//   });
+//   $("div#space8").on("click", function(){
+//     console.log("hello");
+//   });
+//   $("div#space9").on("click", function(){
+//     console.log("hello");
+//   });
+// }
 
-// console.log(testSpace.findxCoordinate());
-// console.log(testSpace.findyCoordinate());
-
-testSpace1.markWith(testPlayer.mark());
-testSpace2.markWith(testPlayer.mark());
-testSpace3.markWith(testPlayer.mark());
-console.log(board.checkRow());
-console.log(testSpace1.markedBy());
-// console.log(testSpace);
-// console.log(testSpace.markedBy());
 
 
 $(document).ready(function(){
-  $("#x1y1").click(function(){
-    $("#x1y1").css({"background-color":"blue"});
-
+  $("div#space1").click(function(event){
+    event.preventDefault;
+    game.changeStatus();
+    game.board.space1.markWith(game.player1.mark())
+    console.log(game.board.space1);
   });
 })
+
+// Further Exploration:
+// Make players able to choose if they want to play X or O
+// Game.prototype.makeChoice{
+//   player1
+//   if player.choiceX === 
+//   player = "X"
+//   e
