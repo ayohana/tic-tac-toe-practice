@@ -1,6 +1,8 @@
 
 #table{
   max-width: 40%;
+  align-items: center;
+  align-content: center;
 }
 
 .height{
@@ -11,6 +13,18 @@ h1{
   text-align: center
 }
 
-#player1turn, #player2turn{
+#player1turn, #player2turn, 
+#player1wins, #player2wins, #x, #o{
   display: none;
+}
+
+#x, #o{
+  font-size: 30px;
+}
+
+#space1, #space2, #space3,
+#space4, #space5, #space6,
+#space7, #space8, #space9 {
+  text-align: center;
+  font-size: 70px;
 }
