@@ -81,12 +81,17 @@ Board.prototype.checkWinner = function(curSpace){
     $("#player1turn").hide();
     $("#player2turn").hide();
     if (curSpace.markedBy() === "X"){
-      $("#player1wins").show();
+      $("#player1wins").slideDown(5000);
+      $("#gameover").show();
+      $("#player2wins").hide();    
     } else {
-      $("#player2wins").show();      
+      $("#player2wins").slideDown(5000);
+      $("#gameover").show();
+      $("#player2wins").hide();      
     }
   }
-}
+  // else if (curSpace.markedBy() === "X" || curSpace.markedBy() === "Y" 
+}  
 
 // Space Constructor --------------------------
 function Space (xCoordinate, yCoordinate){

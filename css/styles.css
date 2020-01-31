@@ -14,7 +14,7 @@ h1{
 }
 
 #player1turn, #player2turn, 
-#player1wins, #player2wins, #x, #o{
+#player1wins, #player2wins, #x, #o, #gameover{
   display: none;
 }
 
